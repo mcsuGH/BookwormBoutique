@@ -18,13 +18,13 @@ services:
     ports:
       - 3002:3000
 
-  # businessLogic:
-  #   image: bookwormboutique-businesslogic
-  #   container_name: businessLogic
-  #   build:
-  #     context: ./backEnd/businessLogic
-  #   ports:
-  #     - 8081:8080
+  businessLogic:
+    image: bookwormboutique-businesslogic
+    container_name: businessLogic
+    build:
+      context: ./backEnd/businessLogic/src/main/businessLogic
+    ports:
+      - 8081:8080
 
   # customerSupport:
   #   image: bookwormboutique-customersupport
