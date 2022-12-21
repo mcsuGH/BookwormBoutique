@@ -3,17 +3,33 @@ version: '3.7'
 services:
 
   administrators:
+    image: bookwormboutique-administrators
     container_name: administrators
     build:
-      context: .
-      dockerfile: adminDockerfile
+      context: ./frontEnd/administrators
     ports:
       - 3001:3000
 
   customers:
+    image: bookwormboutique-customers
     container_name: customers
     build:
-      context: .
-      dockerfile: customerDockerfile
+      context: ./frontEnd/customers
     ports:
       - 3002:3000
+
+  # businessLogic:
+  #   image: bookwormboutique-businesslogic
+  #   container_name: businessLogic
+  #   build:
+  #     context: ./backEnd/businessLogic
+  #   ports:
+  #     - 8081:8080
+
+  # customerSupport:
+  #   image: bookwormboutique-customersupport
+  #   container_name: customerSupport
+  #   build:
+  #     context: ./backEnd/customerSupport
+  #   ports:
+  #     - 8082:8080
