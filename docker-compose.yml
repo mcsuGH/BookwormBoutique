@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+  administrators:
+    container_name: administrators
+    build:
+      context: .
+      dockerfile: adminDockerfile
+    ports:
+      - 3001:3000
+
+  customers:
+    container_name: customers
+    build:
+      context: .
+      dockerfile: customerDockerfile
+    ports:
+      - 3002:3000

@@ -1,0 +1,20 @@
+# pull official base image
+FROM node:18.12-alpine
+
+# set working directory
+WORKDIR /bookwormBoutique/frontEnd/administrators
+
+# add `/app/node_modules/.bin` to $PATHs
+ENV PATH /administrators/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY /frontEnd/administrators/package.json ./
+COPY /frontEnd/administrators/package-lock.json ./
+RUN npm install
+RUN npm install react-scripts@3.4.1 -g
+
+# add app
+COPY ./frontEnd/administrators/ ./
+
+# start app
+CMD ["npm", "start"]
