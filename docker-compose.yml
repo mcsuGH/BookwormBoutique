@@ -22,22 +22,15 @@ services:
     image: bookwormboutique-businesslogic
     container_name: businessLogic
     build:
-      context: ./backEnd/businessLogic/src/main/businessLogic
+      context: ./backEnd/businessLogic/src/main/docker
     ports:
       - 8081:8080
 
-  # customerSupport:
-  #   image: bookwormboutique-customersupport
-  #   container_name: customerSupport
-  #   build:
-  #     context: ./backEnd/customerSupport
-  #   ports:
-  #     - 8082:8080
+  customerSupport:
+    image: bookwormboutique-customersupport
+    container_name: customerSupport
+    build:
+      context: ./backEnd/customerSupport/src/main/docker
+    ports:
+      - 8082:8080
 
-  # test:
-  #   image: test
-  #   container_name: test
-  #   build:
-  #     context: ./demo
-  #   ports:
-  #     - 8081:8080
