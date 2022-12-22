@@ -3,10 +3,10 @@
 .gradle
 
 #frontend
-node_modules
+node_modules/
 
 #backend
-build
+build/
 build/*.jar
 build/*.war
 build/*.ear
