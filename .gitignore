@@ -1,1 +1,13 @@
 .DS_Store
+.idea
+.gradle
+
+#frontend
+node_modules
+
+#backend
+build
+build/*.jar
+build/*.war
+build/*.ear
+target/
