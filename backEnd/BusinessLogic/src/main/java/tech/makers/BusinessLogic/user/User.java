@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "bookworm_user")
 public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +19,8 @@ public class User implements UserDetails {
   private String username;
 
   private String password;
+
+  protected User() {};
 
   public User(String username, String password) {
     this.username = username;

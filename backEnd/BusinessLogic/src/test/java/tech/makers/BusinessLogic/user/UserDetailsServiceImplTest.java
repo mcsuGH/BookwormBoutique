@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.annotation.DirtiesContext;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -21,8 +22,8 @@ public class UserDetailsServiceImplTest {
 
   @Test
   public void whenUserExists_LoadUserByUsernameReturnsUser() {
-    repository.save(new User("user", "pass"));
-    UserDetails result = service.loadUserByUsername("user");
-    assertEquals("user", result.getUsername());
+    repository.save(new User("username", "password"));
+    UserDetails result = service.loadUserByUsername("username");
+    assertEquals("username", result.getUsername());
   }
 }
