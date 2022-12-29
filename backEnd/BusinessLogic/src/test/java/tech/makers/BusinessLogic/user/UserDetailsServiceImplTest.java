@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.DirtiesContext;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -25,5 +27,10 @@ public class UserDetailsServiceImplTest {
     repository.save(new User("username", "password"));
     UserDetails result = service.loadUserByUsername("username");
     assertEquals("username", result.getUsername());
+  }
+
+  @Test
+  public void whenUserDoesNotExists_LoadUserByUsernameThrows() {
+    assertThrows(UsernameNotFoundException.class, () -> service.loadUserByUsername("username"));
   }
 }
