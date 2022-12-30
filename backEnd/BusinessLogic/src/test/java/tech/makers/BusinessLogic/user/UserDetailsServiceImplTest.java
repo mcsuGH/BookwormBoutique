@@ -33,4 +33,11 @@ public class UserDetailsServiceImplTest {
   public void whenUserDoesNotExists_LoadUserByUsernameThrows() {
     assertThrows(UsernameNotFoundException.class, () -> service.loadUserByUsername("username"));
   }
+
+  @Test
+  public void createUser() {
+    service.createUser(new User("username", "password", false));
+    UserDetails result = service.loadUserByUsername("username");
+    assertEquals("username", result.getUsername());
+  }
 }
