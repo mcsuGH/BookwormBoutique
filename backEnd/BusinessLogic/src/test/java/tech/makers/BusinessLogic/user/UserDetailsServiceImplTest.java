@@ -24,7 +24,7 @@ public class UserDetailsServiceImplTest {
 
   @Test
   public void whenUserExists_LoadUserByUsernameReturnsUser() {
-    repository.save(new User("username", "password"));
+    repository.save(new User("username", "password", false));
     UserDetails result = service.loadUserByUsername("username");
     assertEquals("username", result.getUsername());
   }

@@ -20,13 +20,14 @@ public class User implements UserDetails {
 
   private String password;
 
-  private Collection<? extends GrantedAuthority> authorities;
+  private Boolean isAdmin;
 
   protected User() {};
 
-  public User(String username, String password) {
+  public User(String username, String password, Boolean isAdmin) {
     this.username = username;
     this.password = password;
+    this.isAdmin = isAdmin;
   }
 
   public Long getId() {
@@ -35,6 +36,12 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
+    Set<GrantedAuthority> authorities = new HashSet<>();
+    if (isAdmin) {
+      authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    } else {
+      authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+    }
     return authorities;
   }
 
@@ -66,9 +73,5 @@ public class User implements UserDetails {
   @Override
   public boolean isEnabled() {
     return true;
-  }
-
-  public void setAuthorities(final Collection<? extends GrantedAuthority> authorities) {
-    this.authorities = authorities;
   }
 }
