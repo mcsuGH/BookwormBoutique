@@ -20,6 +20,8 @@ public class User implements UserDetails {
 
   private String password;
 
+  private Collection<? extends GrantedAuthority> authorities;
+
   protected User() {};
 
   public User(String username, String password) {
@@ -33,8 +35,6 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    Set<GrantedAuthority> authorities = new HashSet<>();
-    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
     return authorities;
   }
 
@@ -43,6 +43,7 @@ public class User implements UserDetails {
     return password;
   }
 
+  @Override
   public String getUsername() {
     return username;
   }
@@ -65,5 +66,9 @@ public class User implements UserDetails {
   @Override
   public boolean isEnabled() {
     return true;
+  }
+
+  public void setAuthorities(final Collection<? extends GrantedAuthority> authorities) {
+    this.authorities = authorities;
   }
 }
