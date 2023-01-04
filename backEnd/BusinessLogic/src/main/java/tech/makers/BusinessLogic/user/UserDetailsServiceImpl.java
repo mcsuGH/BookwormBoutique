@@ -19,7 +19,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     return user;
   }
 
-  public UserDetails createUser(User user) {
-    return repository.save(user);
-  }
 }
