@@ -2,7 +2,7 @@ package tech.makers.BusinessLogic.session;
 
 import java.security.Principal;
 
-public interface SessionsService {
+public interface SessionService {
   String login(String username, String password);
   String generateToken(String username);
   Session createSession(SessionLogin loginForm);
