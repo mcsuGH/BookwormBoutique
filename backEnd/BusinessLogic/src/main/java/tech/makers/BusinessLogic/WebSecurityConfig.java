@@ -22,7 +22,7 @@ public class WebSecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .csrf().disable()
+//        .csrf().disable()
         .addFilterAfter(new TokenAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
         .authorizeHttpRequests()
         .requestMatchers(HttpMethod.POST, "/api/admin/users").permitAll()
