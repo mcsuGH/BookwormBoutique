@@ -1,2 +1,4 @@
-package tech.makers.BusinessLogic.session;public class SessionSecretNotProvidedException {
+package tech.makers.BusinessLogic.session;
+
+public class SessionSecretNotProvidedException extends RuntimeException {
 }
