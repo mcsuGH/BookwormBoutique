@@ -39,7 +39,7 @@ public class SessionSecretTest {
 
   @Test
   void testGetKeyUsesKeyInProd() {
-    String testSecretKey = "tEsTSeCreTKEy";
+    String testSecretKey = "QtMqoRQ9cZdD6msX+6aOUJJjGW9IczogExFsTpQYBXA=";
     ReflectionTestUtils.setField(SessionSecret.class, "activeProfile", "prod");
     ReflectionTestUtils.setField(SessionSecret.class, "secretKeyBase64Encoded", testSecretKey);
     SecretKey key = SessionSecret.getKey();
