@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.TransactionSystemException;
 import tech.makers.BusinessLogic.user.User;
 import tech.makers.BusinessLogic.user.UserRepository;
 
@@ -42,11 +43,24 @@ public class AdminUserControllerIntegrationTest {
   @Test
   public void testAdminsPostDoesNotCreateNewAdmin_IfUsernameAlreadyExists() throws Exception {
     repository.save(new User("user", "pass", true));
+    assertEquals(1, repository.count());
     mvc.perform(
             MockMvcRequestBuilders.post("/api/admin/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\": \"user\", \"password\": \"pass\", \"isAdmin\": true}"))
         .andExpect(status().isBadRequest())
         .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof DataIntegrityViolationException));
+    assertEquals(1, repository.count());
+  }
+
+  @Test
+  public void testAdminsPostDoesNotCreateNewAdmin_IfUsernameBlank() throws Exception {
+    mvc.perform(
+            MockMvcRequestBuilders.post("/api/admin/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"\", \"password\": \"pass\", \"isAdmin\": true}"))
+        .andExpect(status().isBadRequest())
+        .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof TransactionSystemException));
+    assertEquals(0, repository.count());
   }
 }
