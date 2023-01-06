@@ -10,7 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="bookworm_user")
+@Table(
+    name="bookworm_user",
+    uniqueConstraints = {@UniqueConstraint(columnNames = "username")}
+)
 public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
