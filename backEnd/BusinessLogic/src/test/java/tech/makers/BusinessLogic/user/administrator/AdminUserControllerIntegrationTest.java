@@ -11,7 +11,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import tech.makers.BusinessLogic.user.UserRepository;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureTestDatabase
 @AutoConfigureMockMvc
@@ -27,6 +28,9 @@ public class AdminUserControllerIntegrationTest {
             MockMvcRequestBuilders.post("/api/admin/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\": \"user\", \"password\": \"pass\", \"isAdmin\": true}"))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.user.username").value("user"));
+    assertNotNull(repository.findByUsername("user"));
   }
 }
