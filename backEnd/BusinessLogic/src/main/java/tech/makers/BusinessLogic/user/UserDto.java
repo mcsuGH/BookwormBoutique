@@ -6,6 +6,7 @@ public class UserDto {
   @NotBlank(message = "Username is mandatory")
   private final String username;
 
+  @NotBlank(message = "Password is mandatory")
   private final String password;
 
   public UserDto(String username, String password) {

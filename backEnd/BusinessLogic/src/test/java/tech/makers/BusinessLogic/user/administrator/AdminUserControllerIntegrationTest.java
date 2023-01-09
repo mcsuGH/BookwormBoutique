@@ -64,4 +64,15 @@ public class AdminUserControllerIntegrationTest {
         .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof MethodArgumentNotValidException));
     assertEquals(0, repository.count());
   }
+
+  @Test
+  public void testAdminsPostDoesNotCreateNewAdmin_IfPasswordBlank() throws Exception {
+    mvc.perform(
+            MockMvcRequestBuilders.post("/api/admin/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"user\", \"password\": \"\", \"isAdmin\": true}"))
+        .andExpect(status().isBadRequest())
+        .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof MethodArgumentNotValidException));
+    assertEquals(0, repository.count());
+  }
 }
