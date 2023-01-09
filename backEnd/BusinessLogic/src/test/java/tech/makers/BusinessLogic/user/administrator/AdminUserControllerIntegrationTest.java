@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.TransactionSystemException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import tech.makers.BusinessLogic.user.User;
 import tech.makers.BusinessLogic.user.UserRepository;
 
@@ -44,6 +44,7 @@ public class AdminUserControllerIntegrationTest {
   public void testAdminsPostDoesNotCreateNewAdmin_IfUsernameAlreadyExists() throws Exception {
     repository.save(new User("user", "pass", true));
     assertEquals(1, repository.count());
+
     mvc.perform(
             MockMvcRequestBuilders.post("/api/admin/users")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -60,7 +61,7 @@ public class AdminUserControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\": \"\", \"password\": \"pass\", \"isAdmin\": true}"))
         .andExpect(status().isBadRequest())
-        .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof TransactionSystemException));
+        .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof MethodArgumentNotValidException));
     assertEquals(0, repository.count());
   }
 }

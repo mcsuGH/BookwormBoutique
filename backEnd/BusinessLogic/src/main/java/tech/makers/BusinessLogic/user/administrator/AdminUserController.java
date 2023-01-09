@@ -1,5 +1,6 @@
 package tech.makers.BusinessLogic.user.administrator;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,7 @@ public class AdminUserController {
   private AdminUserServiceImpl adminUserService;
 
   @PostMapping("/api/admin/users")
-  public Session createAdmin(@RequestBody UserDto userDto) {
+  public Session createAdmin(@Valid @RequestBody UserDto userDto) {
     return adminUserService.createAdmin(userDto);
   }
 }
