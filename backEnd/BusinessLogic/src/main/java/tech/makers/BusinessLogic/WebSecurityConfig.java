@@ -27,6 +27,8 @@ public class WebSecurityConfig {
         .authorizeHttpRequests()
         .requestMatchers(HttpMethod.POST, "/api/admin/users").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/customer/users").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/admin/session").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/customer/session").permitAll()
         .requestMatchers("/api/**").authenticated()
         .anyRequest().permitAll();
     return http.build();
