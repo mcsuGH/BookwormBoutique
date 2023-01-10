@@ -75,4 +75,16 @@ public class AdminUserControllerIntegrationTest {
         .andExpect(model().attribute("password", "Password is mandatory"));
     assertEquals(0, repository.count());
   }
+
+  @Test
+  public void testAdminsPostDoesNotCreateNewAdmin_IfUsernameAndPasswordBlank() throws Exception {
+    mvc.perform(
+            MockMvcRequestBuilders.post("/api/admin/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"\", \"password\": \"\", \"isAdmin\": true}"))
+        .andExpect(status().isBadRequest())
+        .andExpect(model().attribute("username", "Username is mandatory"))
+        .andExpect(model().attribute("password", "Password is mandatory"));
+    assertEquals(0, repository.count());
+  }
 }
