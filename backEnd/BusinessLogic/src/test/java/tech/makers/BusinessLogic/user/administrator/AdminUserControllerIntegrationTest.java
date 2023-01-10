@@ -61,7 +61,7 @@ public class AdminUserControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\": \"\", \"password\": \"pass\", \"isAdmin\": true}"))
         .andExpect(status().isBadRequest())
-        .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof MethodArgumentNotValidException));
+        .andExpect(model().attribute("username", "Username is mandatory"));
     assertEquals(0, repository.count());
   }
 
@@ -72,7 +72,7 @@ public class AdminUserControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\": \"user\", \"password\": \"\", \"isAdmin\": true}"))
         .andExpect(status().isBadRequest())
-        .andExpect(result -> assertEquals(true, result.getResolvedException() instanceof MethodArgumentNotValidException));
+        .andExpect(model().attribute("password", "Password is mandatory"));
     assertEquals(0, repository.count());
   }
 }
