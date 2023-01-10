@@ -19,7 +19,8 @@ public class AdminUserServiceImpl implements AdminUserService {
   private SessionServiceImpl sessionService;
 
   public Session createAdmin(UserDto userDto) {
-    User user = repository.save(new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), true));
+    User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), true);
+    repository.save(user);
     String token = sessionService.generateToken(user.getUsername());
     return new Session(user, token);
   }
